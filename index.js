@@ -3,8 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
 const db = require('./database');
+
+const ENV = process.env.NODE_ENV;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
@@ -18,8 +20,12 @@ app.use(cookieParser());
 app.use('/cities', require('./routes/cities'));
 app.use('/weather', require('./routes/weather'));
 
-const ENV = process.env.NODE_ENV;
-const PORT = process.env.PORT || 5000;
+if (ENV === 'production') {
+    app.use(express.static(path.join(__dirname, './client/build')));
+    app.use((req, res) => {
+        res.sendFile(path.join(__dirname, './client/build/index.html'));
+    });
+}
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}...`);
