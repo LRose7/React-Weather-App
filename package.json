@@ -8,7 +8,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "npm start --prefix client",
     "server": "nodemon index.js",
-    "start": "node index.js",
+    "start": "node index",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
