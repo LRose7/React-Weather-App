@@ -5,7 +5,6 @@ class Weather {
     static retrieveByCity (city, callback) {
         request({
             uri: `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${process.env.API_KEY}&units=imperial`,
-            rejectUnauthorized: false,
             json: true
         }).then((res) => {
             callback(res);
