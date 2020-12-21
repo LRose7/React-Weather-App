@@ -1,13 +1,12 @@
 const { Pool } = require('pg');
 
 const CONNECTION_STRING = process.env.DATABASE_URL || 'postgresql://postgres:donJuan777@localhost:5432/weatherdb';
-const SSL = process.env.NODE_ENV === 'production';
+// const SSL = process.env.NODE_ENV === 'production';
 
 class Database {
     constructor () {
         this._pool = new Pool({
             connectionString: CONNECTION_STRING,
-            ssl: SSL
         });
 
         this._pool.on('error', (err, client) => {
